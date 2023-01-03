@@ -1,0 +1,83 @@
+Trong cái project này thì hầu như việc tạo thư mục nó sẽ là 
+làm thủ công, trong đó: 
+- Về phía server: 
+    Mọi thứ làm thủ công từ việc mà setup đến kết nối db
+- Tạo 2 folder chính đó là: client và server, trong đó:
+    + client: 
+    + server: yarn add express
+*Cần tìm hiểu:
+    - Về phía backend:
+        + URLSearchParams
+        + tìm hiểu về mấy cái toJSON, toObject, mấy cái option của thằng schema
+        + Tìm hiểu về thằng express-validator: validationResult()
+        + Đọc kĩ về cái thằng folder handler
+        + Hiểu rõ về cái cơ chế hoạt động của các hàm trong file token.middleware.js
+        + Tìm hiểu thằng model: save(), create(), remove()
+        + Tìm hiểu về thằng express.Router({mergeParams: true})
+        + Tìm hiểu về thằng express
+    - Về phía fronted:
+        + Tìm hiểu về redux-toolkit
+        + Tìm hiểu về thằng material, createTheme
+        + Tìm hiểu về thằng toastify
+        + Tìm hiểu về thằng react-router-dom: chú ý thằng useNavigate
+        + Tìm hiểu về thằng material-ui: chú ý thằng paper, outlet, 
+            useScrollTrigger, drawer, useTheme, 
+            tìm hiển về thằng Typography : chú ý các thuộc tính xs, md, sm, lg của nó
+            tìm hiểu về thằng Divider
+            tìm hiểu về thằng LoadingButton
+        + Tìm hiểu về thằng yup
+        + Tìm hiểu về thằng formik
+        + Tim hiểu về thằng swiper ĐỌC KỸ CÁI THẰNG NÀY VÀO
+        + Tìm hiểu về thằng charCodeAt
+        + Tìm hiểu về thằng useMemo
+        + Tìm hiểu về thằng useCallback
+        + Tìm hiểu về thằng canvas
+
+* Cái flow:
+    - Bên phía server:
+        1. Về thằng folder axios:
+            . Thằng này chỉ sử dụng method get để trả về dữ liệu mà thôi
+        2. Thằng folder models
+            Thì thằng này nó sẽ chứa các Schema(hiểu nôm na các table)
+        3. Thằng folder tmdb:
+            config->endpoint->api
+        4. Thằng folder controller
+            Thằng này sẽ là thằng chứa các hàm để tương tác với model nhằm truy vấn dữ liệu
+        5. Thằng folder routes
+            Thằng này sẽ là thằng quyết định xem gọi thằng controller nào
+            Bên phía server ko có found thì bên phía client mới có thể truy xuất vào database lấy data và render
+
+    - Bên phía client:
+        Cái quan trọng là cần phải tạo ra được các url hợp lý để có thể gọi được router bên phía server 
+
+
+* Xem xét một vài đoạn code: 
+    - setAuthModalOpen(!user)
+        +ví dụ có người dùng thì có nghĩa là true -> false thì sẽ không hiển thị
+
+    Flow của thằng login:
+        + Bên phía server tạo ra router -> controller -> model -> db    
+        + Bên phía client tạo url để truy cập vào đúng cái router dưới server để thực thi code
+        + Thằng model
+        + Thằng controller
+        + Thằng router
+
+
+1. Thằng express
+    + Fast, unopinionated, minimalist web framework for Node.js.
+    + npm init -> npm install express
+    + Basic routing:
+        app.METHOD(PATH, HANDLER)
+        where: 
+            app is an instance of express.
+            METHOD is an HTTP request method, in lowercase.
+            PATH is a path on the server.
+            HANDLER is the function executed when the route is matched.
+        app.get('/', (req, res) => {
+            res.send('Hello World!')
+        })
+    + Static file: To serve static files such as images, CSS files, and JavaScript files, use the express.static built-in middleware function in Express.
+        express.static(root, [options])
+        app.use(express.static('public'))
+        - const path = require('path')
+        - app.use('/static', express.static(path.join(__dirname, 'public')))
